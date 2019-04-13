@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReactJS stateful component Demo</title>
+   <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+   <!--The jsx compiler babel js file-->
+   <script src="./lib/babel.js"></script>   
+
+</head>
+<body>
+<h2>React JS Stateful Component Rendering</h2>
+<div id='id1'>The Component get rendered here</div>
+<script type="text/babel">
+    var StudentResult = React.createClass({
+        getInitialState: function(){
+            return{
+                result:" "
+            };
+        },
+        calculateResult: function(){
+          var refScore = this.refs.studentScore.value;
+ 
+            var score = parseInt(refScore,10);
+            if(score > 30){
+                this.setState({result:"PASS"})
+            }else if(score < 30){
+                this.setState({result:"FAIL"})
+            }else{
+                this.setState({result:""})
+            }
+        },
+         
+    render: function() {
+            return (
+             <div className="score-container">
+                <input type="number" ref="studentScore"
+                       onChange={this.calculateResult}
+                       placeholder="Enter student score"/>
+                 <h2>Result :{this.state.result}</h2>
+             </div>
+            );
+        } 
+
+     
+
+    });
+    ReactDOM.render(<StudentResult/>,  document.getElementById('id1')
+);
+</script>
+</body>
+</html>

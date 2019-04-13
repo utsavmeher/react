@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React with local JSX!</title>
+    <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+<!--The jsx compiler babel js file-->
+  <script src="./lib/babel.js"></script>   
+      
+  </head>
+  <body>
+    <div id="id1"></div>
+   <!--Transasform the script with babel jsx compiler-->
+    <script type="text/babel">
+      ReactDOM.render(
+        <h1><font color='red'>ReactJS Render DOM Page</font></h1>,
+        document.getElementById("id1")
+      );
+    </script>
+
+  </body>
+</html>

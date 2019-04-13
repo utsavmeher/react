@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>Basic Click Counter Example with JSX</title>
+    <link rel="stylesheet" href="base.css" />
+  </head>
+  <body>
+    <h1>Basic Click Counter with JSXTransformer</h1>
+    <div id="container">
+       
+    </div>
+    
+    <p>This is written with JSX and transformed in the browser.</p>
+    <p>This example uses events and state to track clicks and update the rendered output.</p>
+      
+    <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+     <!--The jsx compiler js file-->
+   <script src="./lib/JSXTransformer-v0.12.2.js"></script>  
+
+ <!--The JSXTransformer is depreacated over babel
+    The babel is the new Transpiler--> 
+
+   <!--Enable JSX Trsaspilation with JSXTransformer here-->
+    <script type="text/jsx">
+
+/*
+Initialize the state in the constructor when using ES6 classes.
+
+ constructor(props) {
+    super(props);
+    this.state = { counter: 0 };
+  }
+   And define the getInitialState method when using React.createClass.
+
+  var MyComponent = React.createClass({
+    getInitialState : function () {
+      return { Define initial state  };
+    }
+  })
+
+ */
+      var Counter = React.createClass({
+        getInitialState: function () {
+          return { count: 0 };
+        },
+        handleClick: function () {
+          this.setState({
+            count: this.state.count + 1,
+          });
+        },
+        render: function () {
+          return (
+            <button onClick={this.handleClick}>
+              Click me! Number of clicks: {this.state.count}
+            </button>
+          );
+        }
+      });
+      ReactDOM.render(
+        <Counter />,
+        document.getElementById('container')
+      );
+    </script>
+  </body>
+</html>

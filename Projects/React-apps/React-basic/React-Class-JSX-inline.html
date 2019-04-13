@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+     
+    <title>ReactJS inline style [age</title>
+   <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+   <!--The jsx compiler js file-->
+   <script src="./lib/JSXTransformer-v0.12.2.js"></script>  
+ 
+ 
+ 
+</head>
+<body>
+<script type="text/jsx">
+    var messageStyle={
+            color:"red",
+            border:"1px solid grey",
+            boxShadow:"2px 2px 2px lightGrey",
+            padding: "20px",
+            width: "200px"
+        },
+        GoodMorning = React.createClass({
+            render: function() {
+                return (
+                  <div style={messageStyle}>
+                    Good Morning Web Surfers
+                  </div>
+                );
+            }
+    });
+    ReactDOM.render(<GoodMorning/>, document.body);
+</script>
+</body>
+</html>

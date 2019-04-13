@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <title>React Without JSX</title>
+    <link rel="stylesheet" href="base.css" />
+  </head>
+  <body>
+    <h1>ReactJS App without JSX</h1>
+    <div id="container">
+      The React DOM is rendered here
+    </div>
+     
+    <p>This is written in vanilla JavaScript (without JSX) and transformed in the browser.</p>
+    
+    <script src="../lib/react.js"></script>
+ 
+    <script src="../lib/react-dom.js"></script>     
+
+
+    <script>
+      var TestApplication = React.createClass({
+        render: function() {
+          var elapsed = Math.round(this.props.elapsed  / 100);
+          var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
+          var message =
+            'React has been successfully running for ' + seconds + ' seconds.';
+
+          return React.DOM.p(null, message);
+        }
+      });
+
+      // Call React.createFactory instead of directly call TestApplication({...}) in React.render
+      var ApplicationFactory = React.createFactory(TestApplication);
+
+      var start = new Date().getTime();
+      setInterval(function() {
+        ReactDOM.render(
+          ApplicationFactory({elapsed: new Date().getTime() - start}),
+          document.getElementById('container')
+        );
+      }, 50);
+    </script>
+  </body>
+</html>

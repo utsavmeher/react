@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React App State without Redux</title>
+    <script src="react-15.4.2.js"></script>
+
+   <script src="react-dom-15.4.2.js"></script>    
+
+   <!--The jsx compiler babel js file-->
+   <script src="babel.js"></script>  
+      
+  </head>
+  <body>
+     
+     <h2>React Counter without Redux<h2>
+     <h2>The application state is mamaged by the component</h2>
+    <div id="root"></div>       
+
+ <script type="text/babel">  
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicks: 0,
+      show: true
+    };
+
+  //No binding for functions called in render function
+   //But 'this' is NOT bind inside render
+   this.IncrementItem= this.IncrementItem.bind(this);
+   this.DecreaseItem= this.DecreaseItem.bind(this);
+   this.ToggleClick= this.ToggleClick.bind(this);
+  }
+
+   
+  IncrementItem(){
+    this.setState({ clicks: this.state.clicks + 1 });
+  }
+  DecreaseItem(){
+    this.setState({ clicks: this.state.clicks - 1 });
+  }
+  ToggleClick(){
+    this.setState({ show: !this.state.show });
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.IncrementItem}>Click to increment by 1</button>
+        <button onClick={this.DecreaseItem}>Click to decrease by 1</button>
+        <button onClick={this.ToggleClick}>
+          { this.state.show ? 'Hide number' : 'Show number' }
+        </button>
+        { this.state.show ? <h2>{ this.state.clicks }</h2> : '' }
+      </div>
+    );
+  }
+} 
+   ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+  );  
+ </script>  
+   
+     
+  </body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReactJS Simple Counter </title>
+     <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+   <!--The jsx compiler js file-->
+   <!--script src="../lib/JSXTransformer-v0.12.2.js"></script-->  
+
+   <script src="./lib/babel.js"></script>    
+ 
+</head>
+<body>
+   <h2>ReactJS Counter Component without Redux with Properties</h2>
+    <div id="container"></div>
+ </hr>       
+
+  <script type="text/babel"> 
+
+  class Button extends React.Component {
+
+/*
+  Function binding
+  With React.createClass, React autobinds all functions to   
+  this. So the this keyword is bound to your component’s 
+  instance automatically:
+  onChange={this.handleChange}
+
+  With  ES6 class, with Reac.Component, React no longer autobinds.
+ 1. One way to resolve this is to call bind in render:
+  onChange={this.handleChange.bind(this)}
+
+  There are performance implications since the function is reallocated on every render.
+
+  When experiencing performance issues, avoid using bind or arrow functions in render.
+
+
+  2. Use Arrow Function in Render
+  this context by using an arrow function in render:
+
+   onChange={e => this.handleChange(e)}
+
+  render() {
+  return(<MyInput onChange={(e)=> this.handleOnChange(e) }/>)
+   }
+We have created new anonymous function, which automatically bind this, that’s why we don’t need to use .bind() method. 
+We have still the same methods in class, and new arrow functions as wrappers in callbacks properties.
+
+  This has the same potential performance impact as above
+
+  Arrow function as method
+Instead of standard method notation
+handleChange(e) {...}
+
+use arrow function expression.:
+
+handleChange = (e) => {...}
+
+
+  3.Bind in Constructor
+One way to avoid binding in render is to bind in the constructor  
+
+constructor(props) {
+  super(props);
+  this.handleChange = this.handleChange.bind(this);
+}
+*/
+
+
+  constructor(props) {
+    super(props);
+    this.props = props; 
+   // this.handleClick= this.handleClick.bind(this);
+   
+  }
+
+
+  handleClick(){
+    console.log("Handle Cliick");
+    this.props.onClickFunction(this.props.incrementValue)
+  }
+
+//function Binding inside render method
+   render() {
+     return(<button onClick={(e)=> this.handleClick(e) }>
+         +{this.props.incrementValue}
+      </button>)
+   }
+ }
+ //Function binding inside constructor 
+
+  /*
+  render(){
+    return(<button onClick={this.handleClick}>
+        +{this.props.incrementValue}
+      </button>)
+  }
+ }
+  */
+
+//ES6 arrow function for Rendering component
+
+const Result = props => {
+  return (
+    <div>
+      {props.counter}
+    </div>
+  )
+}
+
+
+ /*
+Initialize the state in the constructor when using ES6 classes, and define the getInitialState method when using React.createClass.
+
+var MyComponent = React.createClass({
+  getInitialState:function() {
+    return {  initial state  };
+  }
+});
+   AND  Not like this!!
+  state = { counter: 0 } 
+
+  */
+
+class Counter extends React.Component { 
+
+ /*
+  Not used..added for comparision
+   getInitialState() {
+    return { counter :10 };
+  }
+  */
+     
+//use constructor to initialize state values from Props
+
+ constructor(props) {
+     super(props);  
+     console.log("State Constructor");     
+     this.state = { counter: 0 };
+     console.log(this.state.counter);
+
+   //No binding for functions called in render function
+    this.incrementCounter= this.incrementCounter.bind(this);
+  }
+  
+
+  //No binding for functions called in render function
+ //But 'this' is NOT bind inside render
+
+//Try binding this in incrementCounter
+
+ incrementCounter(incrementValue){ 
+  console.log("State Counter = "+this.state.counter);  
+  console.log("Increment Counter = "+incrementValue);
+  let counterNew = this.state.counter + incrementValue 
+  console.log("New Counter Value = "+counterNew);
+  //this.state = { counter: counterNew } //This will not work
+ 
+  this.setState({counter: counterNew })//call the base class function: No need to over-ride
+
+  console.log("New State Counter = "+this.state.counter); 
+  
+  //No need to call render explicitly
+  }
+
+/*
+ Try later by enabling babel to compile ES6 arrow functions
+ 
+*/
+
+
+  render() {
+    console.log("Rendering");
+    return (
+      <div>
+        <Button incrementValue={1} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={10} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={100} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={1000} onClickFunction={this.incrementCounter} />
+        <Result counter={this.state.counter} />
+      </div>
+    )
+  } 
+}
+
+ReactDOM.render(<Counter/>,document.getElementById('container'));
+
+ </script>  
+
+</body>
+</html>

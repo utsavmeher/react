@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+     
+    <title>ReactJS App Life Cycle</title>
+   <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+   <!--The jsx compiler js file-->
+   <script src="./lib/JSXTransformer-v0.12.2.js"></script>  
+
+    <style>
+        button{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Here is the React Component life cycle methods</h2> 
+<div id='id1'>React DOM </div>
+
+<script type="text/jsx">
+    
+    var TagClass = React.createClass({
+
+  /*
+  constructor(props)
+   {
+  
+       console.log("inside constructor method");
+ 
+    
+
+    should not call setState() in the constructor(). Instead, if your component needs to use local state, assign the initial state to this.state directly in the constructor: 
+            
+ } ,
+   */
+      getDefaultProps:function(){
+            console.log("inside getDefaultProps method");
+            return{
+                uName:"Baba"
+            };
+        },
+        getInitialState:function(){
+            console.log("inside getInitialState method");
+        return{
+                userName :this.props.uName
+            };             
+        },
+
+   getDerivedStateFromProps(props, state){
+   
+            console.log("inside getDerivedStateFromProps method");
+
+  /*
+
+ Is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing.
+  This  exists for rare use cases where the state depends on changes in props over time. For example, it might be handy for implementing a <Transition> component that compares its previous and next children to decide which of them to animate in and out.
+ */
+
+},
+        componentWillMount:function(){
+            //considered legacy  and NOT used
+            console.log("inside componentWillMount method");
+             
+        },
+        componentDidMount:function(){
+            console.log("inside componentDidMount method");
+           /*
+    invoked immediately after a component is mounted (inserted into the tree). Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+    may call setState() immediately in componentDidMount()
+*/
+             
+        },
+
+ getSnapshotBeforeUpdate(prevProps, prevState){
+   
+            console.log("inside getSnapshotBeforeUpdate method");
+
+  /*
+  invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle will be passed as a parameter to componentDidUpdate().
+
+*/
+             
+},
+        render: function() {
+            console.log("***********inside render method*******");
+            return (
+             <div>
+                <h1>Welcome {this.state.userName}</h1>
+                <button onClick={this.updateName}>
+                    Change Name to Ashok
+                </button>
+                <button onClick={this.removeHandler}>
+                    Remove the TagClass Element Element
+                </button>
+              </div>
+            );
+        },
+        componentWillReceiveProps:function(){
+            console.log("inside componentWillReceiveProps method");
+             
+        },
+        shouldComponentUpdate:function(){
+            console.log("inside shouldComponentUpdate method");
+
+              /*
+
+            React know if a component’s output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.
+        */
+
+            return false;  //defualt should be true
+        },
+        componentWillUpdate:function(){
+      
+            //considered legacy  and NOT used
+
+            console.log("inside componentWillUpdate method");
+             
+           
+        },
+        componentDidUpdate:function(){
+            console.log("inside componentDidUpdate method");
+     /*
+   invoked immediately after updating occurs. This method is not called for the initial render.
+  Het5e is an opportunity to operate on the DOM when the component has been updated. This is also a good place to do network requests as long as you compare the current props to previous props 
+   componentDidUpdate() will not be invoked if shouldComponentUpdate() returns false.
+
+   */
+  //this.fetchData(this.props.userID);
+             
+             
+        },
+        componentWillUnmount:function(){
+            console.log("inside componentWillUnmount method");
+
+            /*
+       invoked immediately before a component is unmounted and    destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in componentDidMount().
+   should not call setState() in componentWillUnmount() because the component will never be re-rendered. 
+  Once a component instance is unmounted, it will never be mounted again.
+
+  If component implements the getSnapshotBeforeUpdate() lifecycle (which is rare), the value it returns will be passed as a third “snapshot” parameter to componentDidUpdate(). Otherwise this parameter will be undefined.
+
+        */
+
+        },
+   
+        updateName:function(){
+           //Props are read only :Cannot set
+           // this.setProps({uName :"Vijay"}) 
+
+          this.setState({
+             userName:"Ashok"              
+          });           
+        },
+        removeHandler: function(){             
+  //ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this).parentNode);
+
+   ReactDOM.unmountComponentAtNode(document.getElementById('id1'));
+        }
+    });
+    ReactDOM.render(<TagClass/>,document.getElementById('id1'));
+</script>
+</body>
+</html>

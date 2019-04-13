@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReactJS Without JSX</title>
+      <script src="../lib/react.js"></script>
+ 
+    <script src="../lib/react-dom.js"></script>
+
+    <style>
+        .headerStyle{
+          color: blue;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var helloMessage = React.createElement('h1',
+        { className: 'headerStyle' }, 'Welcome to ReactJS');
+        ReactDOM.render(helloMessage, document.body);
+    </script>
+</body>
+</html>

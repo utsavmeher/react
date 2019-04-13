@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReactJS Digital Clock aoo</title>
+    <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+   <!--The jsx compiler js file-->
+   <!--script src="./lib/JSXTransformer-v0.12.2.js"></script--> 
+
+   <script src="./lib/babel.js"></script>  
+
+
+
+</script>
+    <style>
+        .clock {
+            display: inline-flex;
+            justify-content: space-around;
+            background: floralwhite;
+            font-size: 2rem;
+            font-family: serif;
+        }
+        .clock .hour,
+        .clock .minute,
+        .clock .second {
+            color: tomato;
+            padding: 1.5rem;
+            text-shadow: 0px 1px grey;
+        }
+    </style>
+</head>
+<body>
+<script type="text/babel">
+    var TsClock = React.createClass({
+        getDefaultProps:function(){
+         console.log("Component getDefaultProps");
+            return{
+                hour:"12",
+                minute:"46",
+                second:"54"
+            };          
+
+        },
+       getInitialState: function(){
+         console.log("The init getInitialState");
+            return{
+                hour :this.props.hour,
+                minute: this.props.minute,
+                second:this.props.second
+            };
+        },
+
+
+        render: function() {
+            return (
+              <div className="clock">
+                  <div className="hour">{this.state.hour}</div>
+                  <div className="minute">{this.state.minute}</div>
+                  <div className="second">{this.state.second}</div>
+              </div>
+            );
+        },
+        updateClock:function(){
+            var clock = new Date(); 
+
+          this.setState({
+             hour :clock.getHours(),
+             minute : clock.getMinutes(),
+             second : clock.getSeconds(),
+          });           
+     
+ 
+        //console.log("The hours are : "+this.state.hour)
+  
+        //console.log("The minutes are : "+this.state.hour)
+
+        console.log("The seconds are : "+this.state.second)
+
+        },
+        componentDidMount:function(){
+         console.log("Component componentDidMount");
+
+            window.setInterval(this.updateClock, 1000);
+        }
+    });
+    ReactDOM.render(<TsClock/>, document.body);
+</script>
+</body>
+</html>

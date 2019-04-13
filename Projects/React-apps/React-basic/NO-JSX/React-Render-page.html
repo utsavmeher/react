@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReactJS Components Rendering</title>
+     <script src="../lib/react.js"></script>
+ 
+    <script src="../lib/react-dom.js"></script>
+    
+   <!--The jsx compiler js file-->
+   <script src="../lib/JSXTransformer-v0.12.2.js"></script>  
+
+   <!--script src="../lib/babel.js"></script--> 
+
+</script>
+    <style>
+        .headerStyle{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+   <h2>ReactJS Class Component With JSX</h2>
+    <div id="container1">      
+    </div>
+ </hr>
+
+   <h2>ReactJS Class Component With out JSX</h2>
+
+   <div id="container2">
+      
+    </div>
+   
+
+  <h2>ReactJS Element as Component Withour JSX</h2>
+
+   <div id="container3">
+      
+    </div>
+
+
+  <h2>ReactJS Component with JSX</h2>
+
+   <div id="container4"></div> 
+
+<h2>ReactJS Component withOut JSX</h2>
+
+   <div id="container5"></div> 
+
+<h2>ReactJS Component with ES6 Arrow Function</h2>
+
+   <div id="container6"></div>  
+
+
+<script type="text/jsx">
+    var HelloMessage = React.createClass({
+        render: function() {
+            return (
+              <h1 className="headerStyle">
+                ReactJS Class Component compiled with JSX 
+              </h1>
+            );
+        }
+    });
+    ReactDOM.render(<HelloMessage/>, document.getElementById('container1'));
+</script>
+
+<script>
+      var TestClass = React.createClass({
+        render: function() {
+           
+          var message = 'This is React Class Component Without JSX';
+
+          return React.DOM.div({className:'headerStyle'}, message);
+        }
+      });
+
+       //Get the ReactElement from React Class above
+      var reactFactory = React.createFactory(TestClass);
+
+     // var  element = reactFactory({});
+
+   var element = React.createElement(TestClass);
+  ReactDOM.render(element, document.getElementById('container2'));    
+    
+
+var divElement = React.createFactory('div');
+var reactElement = divElement({ className: 'headerStyle',html:'Hello' });
+//ReactDOM.render(reactElement, document.getElementById('container2')); 
+          
+    </script>
+
+<script>
+        var ReactElement = React.createElement('h1',
+                { className: 'headerStyle' }, 'RecatJS Element rendered here');
+        ReactDOM.render(ReactElement , document.getElementById('container3'));
+    </script>
+
+
+ <script type="text/jsx">
+
+ //React ES6 compatible Component
+
+ class TestComponent extends React.Component {   
+
+ render() {
+    return <p>This is ES6 compatible React Tes-Component!</p>;
+  }
+}  
+
+ReactDOM.render(<TestComponent/>, document.getElementById('container4'));
+
+ </script>
+
+<script>
+
+ //React ES6 compatible Component without JSX
+
+ class UserComponent extends React.Component {   
+
+ render() {
+   return React.DOM.p({className:'headerStyle'}, "This is ES6 React component UserComponent  without JSX");
+
+  }
+}
+
+   var element1 = React.createElement(UserComponent);
+   ReactDOM.render(element1, document.getElementById('container5'));
+ 
+ </script>
+
+
+<script type="text/jsx">
+
+ //React Component with ES6 arrow function
+
+const Btn = () => (
+    <button>   
+     Click here       
+    </button>
+)
+  
+ReactDOM.render(<Btn/>, document.getElementById('container6'));
+
+ </script> 
+
+
+
+</body>
+</html>

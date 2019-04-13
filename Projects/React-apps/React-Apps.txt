@@ -1,0 +1,23 @@
+https://reactjs.org/docs/thinking-in-react.html
+
+ To create new application react-app1  
+
+  npm install -g create-react-app
+
+  npx create-react-app user-app
+
+   create-react-app multi-counters
+
+ To add the capability to generate new react component
+  
+  npm install -g create-react-component-folder
+
+  crcf TestComponent
+
+
+  npx crcf UserComponent
+
+npm install --save react-link
+
+
+  

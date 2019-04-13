@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReactJS Components Rendering</title>
+     <script src="./lib/react.js"></script>
+ 
+    <script src="./lib/react-dom.js"></script>
+    
+   <!--The jsx compiler js file-->
+   <script src="./lib/JSXTransformer-v0.12.2.js"></script>  
+
+   <!--script src="./lib/babel.js"></script--> 
+
+</script>
+    <style>
+        .headerStyle{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+ </hr> 
+   
+
+   
+
+
+  <h2>ReactJS Component with JSX</h2>
+
+   <div id="container4"></div> 
+
+<h2>ReactJS Component with ES6 Arrow Function</h2>
+
+   <div id="container5"></div>  
+
+
+
+<h2>ReactJS Component withOut JSX</h2>
+
+   <div id="container6"></div> 
+
+
+ <script type="text/jsx">
+
+ //React ES6 compatible Component
+
+ class TestComponent extends React.Component {   
+
+ render() {
+    return <p>This is ES6 compatible React Tes-Component!</p>;
+  }
+}  
+
+ReactDOM.render(<TestComponent/>, document.getElementById('container4'));
+
+ </script>
+
+<script type="text/jsx">
+
+ //React Component (Function)with ES6 arrow function
+
+const Btn = () => (
+    <button>   
+     Click here       
+    </button>
+)
+  
+ReactDOM.render(<Btn/>, document.getElementById('container5'));
+
+ </script> 
+
+<script>
+
+ //React ES6 compatible Component without JSX
+
+ class UserComponent extends React.Component {   
+
+ render() {
+   return React.DOM.p({className:'headerStyle'}, "This is ES6 React component UserComponent  without JSX");
+
+  }
+}
+   //Additional code for rendering without JSX
+   var element1 = React.createElement(UserComponent);
+   ReactDOM.render(element1, document.getElementById('container6'));
+ 
+ </script>
+
+
+
+
+</body>
+</html>
